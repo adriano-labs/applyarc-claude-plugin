@@ -1,0 +1,392 @@
+{
+  "tools": [
+    {
+      "name": "rewrite_cv_bullet",
+      "title": "Rewrite a CV bullet point",
+      "description": "Rewrite one CV or resume bullet point and return a before/after strength score. Use when the user shares a single bullet and wants it stronger, more concise, quantified, or matched to a job description. No account needed; daily per-source limit applies.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "bulletText": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600,
+            "description": "The bullet point to rewrite, at least 3 words"
+          },
+          "mode": {
+            "default": "power-up",
+            "description": "add-numbers, power-up, match-job (needs jobDescription) or make-concise",
+            "type": "string",
+            "enum": [
+              "add-numbers",
+              "power-up",
+              "match-job",
+              "make-concise"
+            ]
+          },
+          "role": {
+            "description": "Role the bullet is for",
+            "type": "string",
+            "maxLength": 120
+          },
+          "jobDescription": {
+            "description": "Job description text, required for match-job",
+            "type": "string",
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "bulletText"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "preview_cover_letter",
+      "title": "Preview a cover letter",
+      "description": "Draft a short cover letter from a pasted job description and a resume summary. Use when the user has no ApplyArc account connected or wants a quick draft without their stored profile. For a letter grounded in the stored CV and saved to the tracker, use generate_for_job instead.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "jobDescription": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000,
+            "description": "Job description, at least 15 words"
+          },
+          "resumeSummary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000,
+            "description": "Resume summary or key experience, at least 10 words"
+          }
+        },
+        "required": [
+          "jobDescription",
+          "resumeSummary"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "prepare_star_answer",
+      "title": "Build a STAR interview answer",
+      "description": "Turn a behavioural interview question into a STAR structure with coaching prompts, an exemplar answer, what the interviewer listens for, and a common mistake. Use when the user is preparing for an interview question. No account needed.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "The interview question"
+          },
+          "vertical": {
+            "default": "generic",
+            "description": "Use nhs for NHS or UK healthcare roles",
+            "type": "string",
+            "enum": [
+              "generic",
+              "nhs"
+            ]
+          }
+        },
+        "required": [
+          "question"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_my_profile",
+      "title": "Get my ApplyArc profile",
+      "description": "Return the signed-in user's stored ApplyArc resume profile (skills, experience summary, target roles). Use when the user asks for advice, tailoring, or a fit check and has not pasted a CV in this conversation.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "check_usage",
+      "title": "Check my AI generation allowance",
+      "description": "Show how many AI generations the user has left this month on ApplyArc, whether they are on Pro, and when the allowance resets. Call this before an AI generation if the user asks about limits or after a limit error.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "list_my_jobs",
+      "title": "List my tracked jobs",
+      "description": "List the jobs the user is tracking in ApplyArc with status, company, title and dates. Use when the user asks what they have applied to, what is in their pipeline, or needs a jobId. Optionally filter by status.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Only return jobs in this pipeline stage",
+            "type": "string",
+            "enum": [
+              "wishlist",
+              "applied",
+              "interview",
+              "offer",
+              "rejected"
+            ]
+          },
+          "limit": {
+            "default": 25,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "save_job",
+      "title": "Save a job to my tracker",
+      "description": "Save a job posting to the user's ApplyArc tracker so it appears in their pipeline on applyarc.com. Ask for the job title and company if the user has not given them.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Job title"
+          },
+          "company": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Company name"
+          },
+          "description": {
+            "description": "Full job description text (paste it for best results)",
+            "type": "string",
+            "maxLength": 50000
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "url": {
+            "description": "Link to the job posting",
+            "type": "string",
+            "maxLength": 2000,
+            "format": "uri"
+          },
+          "status": {
+            "default": "wishlist",
+            "description": "Pipeline stage",
+            "type": "string",
+            "enum": [
+              "wishlist",
+              "applied",
+              "interview",
+              "offer",
+              "rejected"
+            ]
+          },
+          "pay": {
+            "description": "Salary or pay range as written in the posting",
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "title",
+          "company"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "update_job_status",
+      "title": "Move a job to another stage",
+      "description": "Change the pipeline stage of a tracked job (for example from applied to interview). Use list_my_jobs first to find the jobId.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Id returned by list_my_jobs"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "wishlist",
+              "applied",
+              "interview",
+              "offer",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "jobId",
+          "status"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "generate_for_job",
+      "title": "Generate application content with ApplyArc",
+      "description": "Run one of ApplyArc's AI career tools against a job using the user's stored resume profile. Tools: cover-letter, interview-prep, job-match (fit score and gaps), resume-optimizer, follow-up, thank-you, salary-negotiation, company-research, questions-to-ask, outreach-message. Use when the user wants application content for a specific job. Consumes one AI generation from the account's allowance; the result includes the remaining allowance.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "toolId": {
+            "type": "string",
+            "enum": [
+              "cover-letter",
+              "interview-prep",
+              "job-match",
+              "resume-optimizer",
+              "follow-up",
+              "thank-you",
+              "salary-negotiation",
+              "company-research",
+              "questions-to-ask",
+              "outreach-message"
+            ],
+            "description": "Which ApplyArc tool to run"
+          },
+          "job": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "Job title"
+              },
+              "company": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "Company name"
+              },
+              "description": {
+                "description": "Full job description text (paste it for best results)",
+                "type": "string",
+                "maxLength": 50000
+              },
+              "location": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "url": {
+                "description": "Link to the job posting",
+                "type": "string",
+                "maxLength": 2000,
+                "format": "uri"
+              }
+            },
+            "required": [
+              "title",
+              "company"
+            ],
+            "description": "The job to generate for"
+          },
+          "notes": {
+            "description": "Extra guidance from the user, such as tone or points to emphasise",
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "toolId",
+          "job"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

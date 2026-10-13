@@ -39,10 +39,12 @@ and gaps the user can explain are better addressed than hidden.
 2. **Read the posting first.** Before any tool call, pull out the must-haves
    (often 3 to 6), the nice-to-haves and the words the employer repeats. See
    `references/posting-analysis.md`.
-3. **Save it.** Call `list_my_jobs` first. If the same company and title is
-   already tracked, use that job instead of saving a duplicate. Otherwise call
-   `save_job` with status `wishlist` (or `applied` if they already applied).
-   Pass `pay` and `url` when given.
+3. **Save it.** Call `list_my_jobs` with `limit: 100` first. If the same
+   company and title is already tracked, use that job instead of saving a
+   duplicate. Otherwise call `save_job` with status `wishlist` (or `applied` if
+   they already applied). Pass `pay` and `url` when given. If `save_job`
+   returns `alreadyTracked: true`, use the returned job and tell the user it
+   was already in their tracker.
 4. **Read the CV.** Call `get_my_profile`. If it is empty, tell the user they
    can upload a CV at applyarc.com, and meanwhile work from a pasted summary with
    `preview_cover_letter`.

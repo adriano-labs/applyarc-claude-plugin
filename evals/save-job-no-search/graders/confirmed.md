@@ -1,5 +1,5 @@
 ---
 type: regex
-pattern: saved|added|tracker
+pattern: \b(saved|added)\b
 flags: i
 ---

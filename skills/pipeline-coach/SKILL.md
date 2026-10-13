@@ -14,7 +14,9 @@ clear action per stale item keeps momentum and stops good leads going cold.
 
 ## Ground rules
 
-1. **Confirm before writing.** List the stage changes and new saves you intend
+1. **Confirm before writing, unless asked directly.** When the user names the
+   exact change ("save this job", "move Cleo to interview"), that is the yes:
+   do it and confirm in one line. For changes you propose yourself, list them
    and get one yes for the batch. Never move a job on a guess.
 2. **Use returned data exactly.** Dates, stages and ids come from
    `list_my_jobs`. Do not invent dates or contacts.
@@ -41,8 +43,10 @@ clear action per stale item keeps momentum and stops good leads going cold.
 ## Actions
 
 - **Log progress:** `update_job_status` with the `jobId`.
-- **Save a new role:** `save_job` with title, company, description, and pay or
-  url when given.
+- **Save a new role:** first call `list_my_jobs`. If the same company and
+  title is already tracked, do not save; say so and ask whether to leave it,
+  move its stage or add a second entry. Otherwise `save_job` with title,
+  company, description, and pay or url when given.
 - **Chase a silent application:** `generate_for_job` with `follow-up`.
 - **After an interview:** `generate_for_job` with `thank-you`; put names and
   one specific moment in `notes`.

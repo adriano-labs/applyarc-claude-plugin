@@ -1,8 +1,9 @@
 # ApplyArc for Claude
 
 Your job search workspace inside Claude. This plugin connects Claude to your
-ApplyArc account and adds six job search skills and six slash commands: tailor
-an application to a posting, write stronger CV bullets, prepare for and
+ApplyArc account and adds seven job search skills and seven slash commands:
+find live jobs that fit your CV and save them to your tracker, tailor an
+application to a posting, write stronger CV bullets, prepare for and
 practise interviews, run a weekly review of your pipeline, and negotiate an
 offer. It works with the jobs and CV you already keep in ApplyArc, so you never
 paste the same details twice.
@@ -25,6 +26,7 @@ In Claude (web, desktop and mobile), add ApplyArc from the Directory.
 
 | Skill | What it does |
 | --- | --- |
+| `job-finder` | Finds live postings that fit your CV with Claude's web search, shows a short list with real links, and saves the ones you pick to your tracker. |
 | `job-application` | Reads a job posting, scores your fit, tailors your CV and writes a cover letter, then saves the job to your tracker. |
 | `cv-bullet-writer` | Turns duties into honest impact bullets, asking for real numbers instead of inventing them. No account needed. |
 | `interview-prep` | Builds a prep pack for a tracked job: likely questions, STAR stories from your CV, questions to ask, and a debrief afterwards. |
@@ -36,6 +38,7 @@ In Claude (web, desktop and mobile), add ApplyArc from the Directory.
 
 | Command | Use it to |
 | --- | --- |
+| `/applyarc:find` | Find live jobs and save the good ones to your tracker. |
 | `/applyarc:tailor` | Tailor an application to a pasted job posting. |
 | `/applyarc:bullet` | Strengthen one CV bullet. |
 | `/applyarc:interview` | Build an interview prep pack. |
@@ -55,6 +58,8 @@ With your ApplyArc account: `get_my_profile`, `check_usage`, `list_my_jobs`,
 - The plugin connects to the ApplyArc MCP server at
   `https://claude-mcp.applyarc.com/mcp`, which calls applyarc.com APIs over
   HTTPS. It does not contact any other service.
+- The `job-finder` skill uses Claude's own web search, when it is turned on in
+  your Claude settings, to find postings. ApplyArc does not run that search.
 - Sign-in uses OAuth 2.0 with PKCE and your ApplyArc login. It happens only
   when you first use an account tool. Claude never sees your password.
 - With your permission, account tools read your tracked jobs, stored CV profile

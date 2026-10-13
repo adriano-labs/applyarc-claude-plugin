@@ -1,8 +1,8 @@
 {
   "name": "applyarc",
   "displayName": "ApplyArc",
-  "version": "0.1.0",
-  "description": "Job search skills plus the ApplyArc MCP server: fit-check and tailor applications, write impact CV bullets, prepare and practise interviews, run your application pipeline and negotiate offers, all grounded in the CV and jobs stored in your ApplyArc account.",
+  "version": "0.2.0",
+  "description": "Job search skills plus the ApplyArc MCP server: find live jobs that fit your CV and save them to your tracker, fit-check and tailor applications, write impact CV bullets, prepare and practise interviews, run your application pipeline and negotiate offers, all grounded in the CV and jobs stored in your ApplyArc account.",
   "author": {
     "name": "ApplyArc Ltd",
     "url": "https://applyarc.com"
@@ -12,6 +12,7 @@
   "license": "MIT",
   "keywords": [
     "job-search",
+    "job-finder",
     "career",
     "cv",
     "resume",

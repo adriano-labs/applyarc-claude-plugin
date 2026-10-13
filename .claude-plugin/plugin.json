@@ -1,0 +1,28 @@
+{
+  "name": "applyarc",
+  "displayName": "ApplyArc",
+  "version": "0.1.0",
+  "description": "Job search skills plus the ApplyArc MCP server: fit-check and tailor applications, write impact CV bullets, prepare and practise interviews, run your application pipeline and negotiate offers, all grounded in the CV and jobs stored in your ApplyArc account.",
+  "author": {
+    "name": "ApplyArc Ltd",
+    "url": "https://applyarc.com"
+  },
+  "homepage": "https://applyarc.com",
+  "repository": "https://github.com/adriano-labs/applyarc-claude-plugin",
+  "license": "MIT",
+  "keywords": [
+    "job-search",
+    "career",
+    "cv",
+    "resume",
+    "cover-letter",
+    "interview",
+    "job-tracker",
+    "mcp"
+  ],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://applyarc.com/support",
+  "supportUrl": "https://applyarc.com/support",
+  "privacyPolicyUrl": "https://applyarc.com/privacy",
+  "termsOfServiceUrl": "https://applyarc.com/terms"
+}

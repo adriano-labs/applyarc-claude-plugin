@@ -1,0 +1,16 @@
+{
+  "name": "applyarc-plugin-marketplace",
+  "owner": {
+    "name": "ApplyArc Ltd",
+    "url": "https://applyarc.com"
+  },
+  "plugins": [
+    {
+      "name": "applyarc",
+      "description": "Job search skills plus the ApplyArc MCP connector, grounded in your ApplyArc account.",
+      "source": "./",
+      "homepage": "https://applyarc.com"
+    }
+  ],
+  "description": "ApplyArc job search plugin for Claude: skills plus the ApplyArc MCP connector."
+}

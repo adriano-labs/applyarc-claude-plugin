@@ -41,8 +41,8 @@ ApplyArc means the next step ("tailor it") starts from the full posting.
    and seniority to sharpen the search and judge fit. If ApplyArc is not
    connected or the profile is empty, search from the brief alone and say the
    fit notes are based on what the user told you.
-3. **Check the tracker.** Call `list_my_jobs` so you can mark jobs the user
-   already tracks and avoid saving the same job twice.
+3. **Check the tracker.** Call `list_my_jobs` with `limit: 100` so you can
+   mark jobs the user already tracks and avoid saving the same job twice.
 4. **Search.** Run a few focused web searches (title variants plus location,
    and "careers" or the board names above). Open the most promising postings to
    read the real requirements.
@@ -57,7 +57,9 @@ ApplyArc means the next step ("tailor it") starts from the full posting.
 6. **Save the picks.** When the user says "save 1 and 3" (or "save all"), call
    `save_job` once per job with `title`, `company`, `location`, `url`, `pay`
    when stated, status `wishlist`, and the posting text in `description` so
-   later tailoring has the full requirements. Confirm each save in one line.
+   later tailoring has the full requirements. Confirm each save in one line. If
+   `save_job` returns `alreadyTracked: true`, say that job was already in the
+   tracker instead of calling it saved.
 7. **Offer the next step.** Offer to tailor the strongest one now with the
    job-application skill, or to run a weekly check with pipeline-coach.
 

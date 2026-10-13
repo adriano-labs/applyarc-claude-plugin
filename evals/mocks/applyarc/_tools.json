@@ -202,7 +202,7 @@
     {
       "name": "save_job",
       "title": "Save a job to my tracker",
-      "description": "Save a job posting to the user's ApplyArc tracker so it appears in their pipeline on applyarc.com. Ask for the job title and company if the user has not given them.",
+      "description": "Save a job posting to the user's ApplyArc tracker so it appears in their pipeline on applyarc.com. Ask for the job title and company if the user has not given them. If the same job (same link, or same company and title) is already tracked, it is usually not added again and the existing job is returned with alreadyTracked: true.",
       "inputSchema": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",

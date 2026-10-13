@@ -307,6 +307,74 @@
       }
     },
     {
+      "name": "update_job",
+      "title": "Edit a tracked job",
+      "description": "Change the details of a job already in the user's ApplyArc tracker: title, company, location, posting link, pay or description. Only the fields you pass are changed; the rest stay as they are. Use list_my_jobs first to find the jobId, and confirm the new values with the user before overwriting. To change the pipeline stage use update_job_status.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Id returned by list_my_jobs"
+          },
+          "title": {
+            "description": "New job title",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "company": {
+            "description": "New company name",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "url": {
+            "description": "Link to the job posting; an empty string removes the link",
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000,
+                "format": "uri"
+              },
+              {
+                "type": "string",
+                "const": ""
+              }
+            ]
+          },
+          "pay": {
+            "description": "Salary or pay range as written in the posting",
+            "type": "string",
+            "maxLength": 100
+          },
+          "description": {
+            "description": "Full job description text",
+            "type": "string",
+            "maxLength": 50000
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
       "name": "generate_for_job",
       "title": "Generate application content with ApplyArc",
       "description": "Run one of ApplyArc's AI career tools against a job using the user's stored resume profile. Tools: cover-letter, interview-prep, job-match (fit score and gaps), resume-optimizer, follow-up, thank-you, salary-negotiation, company-research, questions-to-ask, outreach-message. Use when the user wants application content for a specific job. Consumes one AI generation from the account's allowance; the result includes the remaining allowance.",

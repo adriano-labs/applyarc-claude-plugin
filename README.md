@@ -51,7 +51,7 @@ In Claude (web, desktop and mobile), add ApplyArc from the Directory.
 No account: `rewrite_cv_bullet`, `preview_cover_letter`, `prepare_star_answer`.
 
 With your ApplyArc account: `get_my_profile`, `check_usage`, `list_my_jobs`,
-`save_job`, `update_job_status`, `generate_for_job`.
+`save_job`, `update_job_status`, `update_job`, `generate_for_job`.
 
 ## Data and network use
 
